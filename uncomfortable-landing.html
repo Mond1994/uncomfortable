@@ -343,10 +343,79 @@
             opacity: 0.3;
         }
 
+        /* News Section */
+        .news {
+            padding: 8rem 5%;
+            background: var(--secondary);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.1);
+        }
+
+        .news-date {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .news-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .news-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-link {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .news-card:hover .news-link {
+            color: var(--gradient-end);
+        }
+
         /* Methodology Section */
         .methodology {
             padding: 8rem 5%;
-            background: var(--secondary);
+            background: var(--primary);
         }
 
         .methodology-grid {
@@ -528,6 +597,7 @@
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#news">Insights</a></li>
             <li><a href="#methodology">Methodology</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -622,6 +692,33 @@
         </div>
     </section>
 
+    <section class="news" id="news">
+        <div class="section-header">
+            <h2>Latest Insights</h2>
+            <p>Thoughts on Japan's deeptech ecosystem, startup culture, and cross-border innovation</p>
+        </div>
+        <div class="news-grid">
+            <a href="https://note.com/deb_kumar_mondal/n/n787d6fa95dba" target="_blank" class="news-card">
+                <div class="news-date">2025</div>
+                <h3>"Nobody will give me a Loan"</h3>
+                <p>No business exists without problems. Entrepreneurs love solving problems worth solving, but inevitably encounter unwanted obstacles that hinder their growth.</p>
+                <span class="news-link">Read on Note →</span>
+            </a>
+            <a href="https://note.com/deb_kumar_mondal/n/na7ac33d104f9" target="_blank" class="news-card">
+                <div class="news-date">2025</div>
+                <h3>Why 'Uncomfortable'</h3>
+                <p>Japan's startup ecosystem brims with potential yet faces systemic challenges—risk aversion, lack of diversity, and barriers for women and foreign entrepreneurs.</p>
+                <span class="news-link">Read on Note →</span>
+            </a>
+            <a href="https://note.com/deb_kumar_mondal/n/na1320a44cbbe" target="_blank" class="news-card">
+                <div class="news-date">2025</div>
+                <h3>"Are you dating your Co-founder?"</h3>
+                <p>In Japan, women founders with male cofounders often face intrusive questions about their relationship, highlighting gender bias in the startup ecosystem.</p>
+                <span class="news-link">Read on Note →</span>
+            </a>
+        </div>
+    </section>
+
     <section class="methodology" id="methodology">
         <div class="section-header">
             <h2>Our Process</h2>
@@ -658,24 +755,24 @@
             <br>
             <a href="mailto:deb@uncomfortable.today" class="btn btn-primary" style="display: inline-block;">Start the Conversation</a>
             
-            <div class="contact-info">
-                <div class="contact-item">
+            <div class="contact-info" style="flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
+                <div class="contact-item" style="width: 280px; justify-content: flex-start;">
                     <div class="contact-icon">✉️</div>
-                    <div>
+                    <div style="text-align: left;">
                         <h4>Email</h4>
                         <p>deb@uncomfortable.today</p>
                     </div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item" style="width: 280px; justify-content: flex-start;">
                     <div class="contact-icon">📍</div>
-                    <div>
+                    <div style="text-align: left;">
                         <h4>Address</h4>
                         <p>東京都港区浜松町2-2-15<br>浜松町ダイヤビル2F</p>
                     </div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item" style="width: 280px; justify-content: flex-start;">
                     <div class="contact-icon">🏢</div>
-                    <div>
+                    <div style="text-align: left;">
                         <h4>Corporate No.</h4>
                         <p>8010401189606</p>
                     </div>
