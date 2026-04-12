@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社uncomfortable | Deeptech VC Ecosystem Positioning in Japan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #fafafa;
+            --accent: #dc2626;
+            --accent-glow: rgba(220, 38, 38, 0.15);
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --gradient-start: #dc2626;
+            --gradient-end: #991b1b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 50px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 5%;
+            background: var(--secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .visual-card {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .visual-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Methodology Section */
+        .methodology {
+            padding: 8rem 5%;
+            background: var(--secondary);
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .method-step {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .method-step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -1rem;
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .services {
+            background: #f5f5f5;
+        }
+
+        .methodology {
+            background: #f5f5f5;
+        }
+
+        .method-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .method-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-step p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 5%;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact > p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-item div {
+            text-align: left;
+        }
+
+        .contact-item h4 {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item p {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+            background: #ffffff;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .methodology-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .method-step::after {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">株式会社<span>uncomfortable</span></div>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#methodology">Methodology</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Deeptech VC Ecosystem Positioning</div>
+            <h1>Bridge Global Capital with <span class="gradient">Japan's Deeptech Ecosystem</span></h1>
+            <p class="hero-subtitle">We position international deeptech VCs within Japan's complex local ecosystem—unlocking access to government funding, university spinouts, corporate partners, and breakthrough startups.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Enter the Ecosystem</a>
+                <a href="#services" class="btn btn-secondary">Our Approach</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Strategic positioning for deeptech VCs seeking to establish presence in Japan's innovation ecosystem</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏛️</div>
+                <h3>Government Relations</h3>
+                <p>Navigate Japan's complex funding landscape—NEDO, METI, JETRO, JST, and local government programs. We secure non-dilutive capital and build regulatory pathways.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3>University Access</h3>
+                <p>Direct pipelines to Japan's top research institutions—Osaka University, Kyoto University, OIST, AIST. Access pre-seed spinouts before they hit the market.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>Corporate Partnerships</h3>
+                <p>Connect with Japanese corporates seeking deeptech innovation. Structure co-investment and strategic partnership deals.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Deal Flow Curation</h3>
+                <p>Curated access to Japan's most promising deeptech startups—fusion energy, quantum computing, advanced materials, semiconductors, and biotech.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌉</div>
+                <h3>Ecosystem Integration</h3>
+                <p>Full-spectrum positioning within Japan's innovation clusters—KSAC, OUVC, Kyoto iCAP, J-Startup Kansai. Become an insider, not a tourist.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>Fundraising Strategy</h3>
+                <p>Structuring Japan-specific investment vehicles—local entity setup, LP relationships with Japanese institutions, and co-investment frameworks.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>Your Gateway to Japan's Deeptech Ecosystem</h2>
+                <p>Founded by Deb Kumar Mondal, 株式会社uncomfortable serves as the bridge between international deeptech capital and Japan's innovation ecosystem. We don't just introduce you to players—we position you as an integral part of the landscape.</p>
+                <p>We navigate the complex web of relationships that make Japan's deeptech market accessible to global VCs.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>10+</h3>
+                        <p>Active Projects</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>35+</h3>
+                        <p>Startups in Pipeline</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>10+</h3>
+                        <p>Govt Body Access</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual">
+                <div class="visual-card">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">About Deb Kumar</h3>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="deb-photo.jpg" alt="Deb Kumar Mondal" style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1rem; object-fit: cover; border: 3px solid var(--accent);">
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>Deb Kumar Mondal</strong> is the founder of 株式会社uncomfortable, empowering entrepreneurs to build their dreams in Japan.
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+                        A 2016 IIT Bombay Mechanical Engineering graduate, Deb spent 3 years as an R&D Engineer at Daikin Industries Japan and 1 year as a Management Consultant at Accenture Japan, working with key stakeholders at large-cap Japanese oil and chemical companies. He later served as Chief Product Officer at Tech Japan, consulting with J-Startup companies, Japanese and Indian government bodies, and top IITs/IIMs to build sustainable India-Japan collaboration ecosystems.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="methodology" id="methodology">
+        <div class="section-header">
+            <h2>Our Process</h2>
+            <p>A proven framework for establishing deeptech VCs within Japan's innovation ecosystem</p>
+        </div>
+        <div class="methodology-grid">
+            <div class="method-step">
+                <div class="step-number">1</div>
+                <h3>Map</h3>
+                <p>Identify your strategic entry points—government, university, corporate</p>
+            </div>
+            <div class="method-step">
+                <div class="step-number">2</div>
+                <h3>Connect</h3>
+                <p>Warm introductions to key decision-makers and ecosystem gatekeepers</p>
+            </div>
+            <div class="method-step">
+                <div class="step-number">3</div>
+                <h3>Position</h3>
+                <p>Establish credibility through funding wins and partnership deals</p>
+            </div>
+            <div class="method-step">
+                <div class="step-number">4</div>
+                <h3>Scale</h3>
+                <p>Expand presence through curated deal flow and co-investment networks</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Enter Japan's Deeptech Ecosystem</h2>
+            <p>Japan's deeptech revolution is happening now. The question is whether you'll be positioned to participate—or watching from the outside.</p>
+            <br>
+            <a href="mailto:deb@uncomfortable.today" class="btn btn-primary" style="display: inline-block;">Start the Conversation</a>
+            
+            <div class="contact-info" style="flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
+                <div class="contact-item" style="width: 280px; justify-content: flex-start;">
+                    <div class="contact-icon">✉️</div>
+                    <div style="text-align: left;">
+                        <h4>Email</h4>
+                        <p>deb@uncomfortable.today</p>
+                    </div>
+                </div>
+                <div class="contact-item" style="width: 280px; justify-content: flex-start;">
+                    <div class="contact-icon">📍</div>
+                    <div style="text-align: left;">
+                        <h4>Address</h4>
+                        <p>東京都港区浜松町2-2-15<br>浜松町ダイヤビル2F</p>
+                    </div>
+                </div>
+                <div class="contact-item" style="width: 280px; justify-content: flex-start;">
+                    <div class="contact-icon">🏢</div>
+                    <div style="text-align: left;">
+                        <h4>Corporate No.</h4>
+                        <p>8010401189606</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 株式会社uncomfortable. All rights reserved.</p>
+    </footer>
+</body>
+</html>
