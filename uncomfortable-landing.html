@@ -350,15 +350,21 @@
             background: var(--secondary);
         }
 
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+        .news-carousel-container {
+            position: relative;
             max-width: 1200px;
             margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .news-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 2rem;
         }
 
         .news-card {
+            flex: 0 0 calc(33.333% - 1.33rem);
             background: #ffffff;
             border: 1px solid rgba(0,0,0,0.08);
             border-radius: 16px;
@@ -411,6 +417,48 @@
 
         .news-card:hover .news-link {
             color: var(--gradient-end);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent);
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 968px) {
+            .news-card {
+                flex: 0 0 calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .news-card {
+                flex: 0 0 100%;
+            }
+
+            .carousel-btn.prev {
+                left: 10px;
+            }
+
+            .carousel-btn.next {
+                right: 10px;
+            }
         }
 
         /* Methodology Section */
@@ -698,25 +746,34 @@
             <h2>Latest Insights</h2>
             <p>Thoughts on Japan's deeptech ecosystem, startup culture, and cross-border innovation</p>
         </div>
-        <div class="news-grid">
-            <a href="https://note.com/deb_kumar_mondal/n/n787d6fa95dba" target="_blank" class="news-card">
-                <div class="news-date">2025</div>
-                <h3>"Nobody will give me a Loan"</h3>
-                <p>No business exists without problems. Entrepreneurs love solving problems worth solving, but inevitably encounter unwanted obstacles that hinder their growth.</p>
-                <span class="news-link">Read on Note →</span>
-            </a>
-            <a href="https://note.com/deb_kumar_mondal/n/na7ac33d104f9" target="_blank" class="news-card">
-                <div class="news-date">2025</div>
-                <h3>Why 'Uncomfortable'</h3>
-                <p>Japan's startup ecosystem brims with potential yet faces systemic challenges—risk aversion, lack of diversity, and barriers for women and foreign entrepreneurs.</p>
-                <span class="news-link">Read on Note →</span>
-            </a>
-            <a href="https://note.com/deb_kumar_mondal/n/na1320a44cbbe" target="_blank" class="news-card">
-                <div class="news-date">2025</div>
-                <h3>"Are you dating your Co-founder?"</h3>
-                <p>In Japan, women founders with male cofounders often face intrusive questions about their relationship, highlighting gender bias in the startup ecosystem.</p>
-                <span class="news-link">Read on Note →</span>
-            </a>
+        <div class="news-carousel-container">
+            <div class="news-carousel" id="newsCarousel">
+                <a href="https://note.com/deb_kumar_mondal/n/n38dae455170b" target="_blank" class="news-card">
+                    <div class="news-date">2026</div>
+                    <h3>The Invisible Pipeline</h3>
+                    <p>Why Kansai's deeptech ecosystem is Japan's best-kept secret—and why most foreign VCs never find it. The best deals aren't on Crunchbase. They're in professor's offices at Osaka University.</p>
+                    <span class="news-link">Read on Note →</span>
+                </a>
+                <a href="https://note.com/deb_kumar_mondal/n/n787d6fa95dba" target="_blank" class="news-card">
+                    <div class="news-date">2025</div>
+                    <h3>"Nobody will give me a Loan"</h3>
+                    <p>No business exists without problems. Entrepreneurs love solving problems worth solving, but inevitably encounter unwanted obstacles that hinder their growth.</p>
+                    <span class="news-link">Read on Note →</span>
+                </a>
+                <a href="https://note.com/deb_kumar_mondal/n/na7ac33d104f9" target="_blank" class="news-card">
+                    <div class="news-date">2025</div>
+                    <h3>Why 'Uncomfortable'</h3>
+                    <p>Japan's startup ecosystem brims with potential yet faces systemic challenges—risk aversion, lack of diversity, and barriers for women and foreign entrepreneurs.</p>
+                    <span class="news-link">Read on Note →</span>
+                </a>
+                <a href="https://note.com/deb_kumar_mondal/n/na1320a44cbbe" target="_blank" class="news-card">
+                    <div class="news-date">2025</div>
+                    <h3>"Are you dating your Co-founder?"</h3>
+                    <p>In Japan, women founders with male cofounders often face intrusive questions about their relationship, highlighting gender bias in the startup ecosystem.</p>
+                    <span class="news-link">Read on Note →</span>
+                </a>
+            </div>
+            <div class="carousel-dots" id="carouselDots"></div>
         </div>
     </section>
 
@@ -785,5 +842,84 @@
     <footer>
         <p>&copy; 2026 株式会社uncomfortable. All rights reserved.</p>
     </footer>
+
+    <script>
+        // News Carousel
+        let currentSlide = 0;
+        const carousel = document.getElementById('newsCarousel');
+        const dotsContainer = document.getElementById('carouselDots');
+        const cards = carousel.querySelectorAll('.news-card');
+        const totalSlides = cards.length;
+        let cardsPerView = getCardsPerView();
+        let maxSlide = Math.max(0, totalSlides - cardsPerView);
+
+        function getCardsPerView() {
+            if (window.innerWidth <= 600) return 1;
+            if (window.innerWidth <= 968) return 2;
+            return 3;
+        }
+
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            const numDots = maxSlide + 1;
+            for (let i = 0; i < numDots; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot' + (i === currentSlide ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateCarousel() {
+            const cardWidth = cards[0].offsetWidth;
+            const gap = 32; // 2rem gap
+            const offset = currentSlide * (cardWidth + gap);
+            carousel.style.transform = `translateX(-${offset}px)`;
+
+            // Update dots
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveCarousel(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = maxSlide;
+            if (currentSlide > maxSlide) currentSlide = 0;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function handleResize() {
+            const newCardsPerView = getCardsPerView();
+            if (newCardsPerView !== cardsPerView) {
+                cardsPerView = newCardsPerView;
+                maxSlide = Math.max(0, totalSlides - cardsPerView);
+                currentSlide = Math.min(currentSlide, maxSlide);
+                createDots();
+                updateCarousel();
+            }
+        }
+
+        // Initialize
+        createDots();
+        updateCarousel();
+
+        // Handle resize
+        window.addEventListener('resize', handleResize);
+
+        // Auto-play (optional)
+        setInterval(() => {
+            if (maxSlide > 0) {
+                currentSlide = (currentSlide + 1) > maxSlide ? 0 : currentSlide + 1;
+                updateCarousel();
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
